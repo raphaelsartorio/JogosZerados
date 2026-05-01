@@ -269,13 +269,13 @@ function updateDraftValue(jogoId, field, value) {
               </div>
             </div>
 
-            <div class="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+            <div class="flex flex-wrap gap-2">
               <div
                 v-for="field in mainFields"
                 :key="`${jogo.id}-${field.key}`"
-                class="rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3"
+                class="min-w-[13rem] flex-1 rounded-2xl border border-white/10 bg-white/[0.03] px-3 py-2 xl:flex-none"
               >
-                <p class="text-[10px] uppercase tracking-[0.22em] text-[var(--color-muted)]">{{ field.label }}</p>
+                <p class="text-[10px] uppercase tracking-[0.18em] text-[var(--color-muted)]">{{ field.label }}</p>
                 <div v-if="isEditing(jogo.id)" class="mt-2">
                   <InlineEdit
                     v-model="drafts[jogo.id][field.key]"
@@ -283,7 +283,7 @@ function updateDraftValue(jogoId, field, value) {
                     @commit="updateDraftValue(jogo.id, field.key, $event)"
                   />
                 </div>
-                <p v-else class="mt-2 break-words text-sm font-medium leading-relaxed">
+                <p v-else class="mt-1 truncate text-sm font-semibold leading-snug">
                   {{ displayField(jogo, field) }}
                 </p>
               </div>
@@ -291,9 +291,9 @@ function updateDraftValue(jogoId, field, value) {
               <div
                 v-for="field in metaFields"
                 :key="`${jogo.id}-meta-${field.key}`"
-                class="rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3"
+                class="min-w-[13rem] flex-1 rounded-2xl border border-white/10 bg-white/[0.03] px-3 py-2 xl:flex-none"
               >
-                <p class="text-[10px] uppercase tracking-[0.22em] text-[var(--color-muted)]">{{ field.label }}</p>
+                <p class="text-[10px] uppercase tracking-[0.18em] text-[var(--color-muted)]">{{ field.label }}</p>
                 <div v-if="isEditing(jogo.id)" class="mt-2">
                   <InlineEdit
                     v-if="field.type !== 'checkbox'"
@@ -308,7 +308,7 @@ function updateDraftValue(jogoId, field, value) {
                     @commit="updateDraftValue(jogo.id, field.key, $event)"
                   />
                 </div>
-                <p v-else class="mt-2 text-sm font-medium">
+                <p v-else class="mt-1 truncate text-sm font-semibold leading-snug">
                   {{ field.format ? field.format(jogo) : (jogo[field.key] || 'N/D') }}
                 </p>
               </div>
